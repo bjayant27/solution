@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: py-web-app
+  name: py-web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: py-web-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: py-web-app
+    spec:
+      containers:
+      - image: bjayant/my-simple-webapp:latest
+        name: py-web-app
+        ports:
+        - containerPort: 8080
+        resources: 
+          requests:
+            cpu: 0.1
+            memory: 128M
+          limits:
+            cpu: 1.0
+            memory: 512M
+
