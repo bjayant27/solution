@@ -2,7 +2,7 @@
 
 ASSUMPTIONS: 
 
-* Docker runtime engine installed
+* Docker or some container runtime engine installed
 * Kubernetes cluster already setup
 
 Clone Repo
@@ -13,7 +13,7 @@ Clone Repo
 
 build image
 
-	docker build -t my-py-webapp .
+	docker build -t my-node-webapp .
 
 push to registry
 
@@ -23,10 +23,10 @@ deploy to K8S
 
    TO RUN AS STANDALONE POD AND SERVICE
 
-   	kubectl apply -f py-web-pod.yaml
-	kubectl apply -f py-web-service.yaml
+   	kubectl apply -f k8s/web-pod.yaml
+	kubectl apply -f k8s/web-service.yaml
 
    TO RUN AS DEPLOYMENT
 
-	kubectl apply -f k8s/py-web-deploy.yaml
-	kubectl apply -f k8s/py-web-service.yaml
+	kubectl apply -f k8s/web-deploy.yaml
+	kubectl apply -f k8s/web-service.yaml

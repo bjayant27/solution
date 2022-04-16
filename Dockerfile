@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM node:latest
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,6 @@ RUN useradd -ms /bin/bash appuser
 
 USER appuser
 
-CMD [ "python", "./webserver.py" ]
+EXPOSE 8080
+
+CMD [ "node", "./webserver.js" ]
