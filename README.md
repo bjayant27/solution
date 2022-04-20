@@ -11,22 +11,14 @@ Clone Repo
 
 **Optional steps if you would like to make changes and push to registry.
 
-build image
+build, tag & push image
 
-	docker build -t my-node-webapp .
+	docker build -t bjayant/my-hello-app:1.0.0 .
 
-push to registry
+	docker tag bjayant/my-hello-app:1.0.0 bjayant/my-hello-app:latest
 
 	docker push <your docker registry/project:tag>
 
 deploy to K8S
 
-   TO RUN AS STANDALONE POD AND SERVICE
-
-   	kubectl apply -f k8s/web-pod.yaml
-	kubectl apply -f k8s/web-service.yaml
-
-   TO RUN AS DEPLOYMENT
-
-	kubectl apply -f k8s/web-deploy.yaml
-	kubectl apply -f k8s/web-service.yaml
+	kubectl apply -f k8s/deploy-hello-app.yaml
