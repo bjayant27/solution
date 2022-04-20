@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-node-app
+  name: my-node-service
+spec:
+  ports:
+  - name: my-node-app
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: my-node-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-node-app
+spec:
+  selector:
+    matchLabels:
+      app: my-node-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-node-app
+    spec:
+      containers:
+      - image: bjayant/todoapp:latest
+        name: my-node-app
+        ports:
+        - name: my-node-app
+          containerPort: 3000
+        resources: 
+          requests:
+            cpu: "0.1"
+            memory: 128M
+          limits:
+            cpu: "1.0"
+            memory: 512M
+        env:
+        - name: MYSQL_HOST
+          value: mysql-svc
+        - name: MYSQL_USER
+          value: appuser
+        - name: MYSQL_DB
+          value: todo_db
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-creds
+              key: password
+      dnsPolicy: ClusterFirst
+
