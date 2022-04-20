@@ -6,8 +6,12 @@ ADD src .
 
 RUN useradd -ms /bin/bash appuser
 
+RUN chown -R appuser:appuser /usr/src/app
+
 USER appuser
 
-EXPOSE 8080
+ENV MYSQL_PASSWORD "${MYSQL_ROOT_PASSWORD}"
 
-CMD [ "node", "./webserver.js" ]
+EXPOSE 3000
+
+CMD [ "node", "index.js" ]
